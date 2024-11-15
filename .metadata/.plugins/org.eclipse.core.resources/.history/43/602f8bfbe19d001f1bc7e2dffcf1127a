@@ -1,0 +1,13 @@
+package com.example.demo.repository;
+
+import jakarta.persistence.EntityManager;
+
+@Repository
+public class ClienteRepository {
+
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	public List<Cliente> query = (Query<Cliente>) entityManager.createQuery("select c from Cliente c", Cliente.class);
+}

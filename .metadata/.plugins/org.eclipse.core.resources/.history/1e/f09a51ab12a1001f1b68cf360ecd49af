@@ -1,0 +1,29 @@
+package com.example.demo.repositorio;
+
+import java.util.List;
+
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.Cliente;
+import com.example.demo.model.Vehiculo;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
+@Repository
+public class VehiculoRepositorio {
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	public List<Vehiculo> getVehiculos() {
+		Query<Vehiculo> query = (Query<Vehiculo>) entityManager.createQuery("select c from Vehiculo c", Vehiculo.class);
+		List<Vehiculo> vehiculos = query.getResultList();
+		return vehiculos;
+	}
+
+	public void addVehiculo(Vehiculo v) {
+		entityManager.persist(v);;
+	}
+}
